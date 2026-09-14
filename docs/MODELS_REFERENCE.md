@@ -178,6 +178,18 @@ This document outlines the database schema, models, field types, and choices (en
 | `notification_state` | `CharField` | - |
 | `createdAt` | `DateTimeField` | Blank=True |
 
+### `tbl_push_token`
+- **Database Table:** `tbl_push_token`
+
+| Field Name | Data Type | Constraints / Choices / FK |
+| --- | --- | --- |
+| `token_id` | `UUIDField` | Primary Key, Unique |
+| `user` | `ForeignKey` | FK -> `tbl_user_profile` |
+| `push_token` | `CharField` | Unique |
+| `device_type` | `CharField` | Blank=True |
+| `updatedAt` | `DateTimeField` | Blank=True |
+| `createdAt` | `DateTimeField` | Blank=True |
+
 ## Chat App
 
 ### `tbl_chat_message`

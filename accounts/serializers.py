@@ -698,6 +698,7 @@ class PublicProfileSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'full_name',
+            'email',
             'account_type',
             'verification_status',
             'profile_link',

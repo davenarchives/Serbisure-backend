@@ -42,6 +42,21 @@ class NotificationMarkReadView(APIView):
             return Response({'error': 'Notification not found.'}, status=status.HTTP_404_NOT_FOUND)
 
 
+class NotificationDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk):
+        try:
+            notification = tbl_notification.objects.get(
+                notification_id=pk,
+                receiver_id=request.user
+            )
+            notification.delete()
+            return Response({'status': 'deleted', 'notification_id': str(pk)}, status=status.HTTP_200_OK)
+        except tbl_notification.DoesNotExist:
+            return Response({'error': 'Notification not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+
 class NotificationMarkAllReadView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -56,3 +71,4 @@ class NotificationMarkAllReadView(APIView):
             'status': 'success',
             'marked_count': updated_count
         }, status=status.HTTP_200_OK)
+
